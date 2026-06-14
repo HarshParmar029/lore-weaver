@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lore Weaver</title>
+<style>
+  :root {
+    --ink: #2b2220;
+    --parchment: #f3ead9;
+    --parchment-dark: #e6d8bf;
+    --gold: #b8893f;
+    --deep-teal: #2f4a4a;
+    --rust: #a4502c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    background: var(--parchment);
+    color: var(--ink);
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(184,137,63,0.08), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(47,74,74,0.08), transparent 40%);
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 3rem 1.5rem 1.5rem;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  header h1 {
+    font-size: 2.6rem;
+    letter-spacing: 0.04em;
+    margin: 0;
+    color: var(--deep-teal);
+    text-shadow: 1px 1px 0 rgba(184,137,63,0.3);
+  }
+
+  header p {
+    font-style: italic;
+    color: var(--rust);
+    margin-top: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  main {
+    max-width: 760px;
+    margin: 2rem auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .card {
+    background: #fffdf7;
+    border: 1px solid var(--parchment-dark);
+    border-radius: 6px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 14px rgba(43,34,32,0.06);
+    margin-bottom: 1.5rem;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: var(--deep-teal);
+  }
+
+  input, select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1.1rem;
+    border: 1px solid var(--parchment-dark);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    background: var(--parchment);
+    color: var(--ink);
+  }
+
+  button {
+    background: var(--rust);
+    color: #fffdf7;
+    border: none;
+    padding: 0.8rem 1.6rem;
+    font-size: 1.05rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.03em;
+    transition: background 0.2s ease;
+    width: 100%;
+  }
+
+  button:hover { background: #8a3f22; }
+  button:disabled { background: #c9a98f; cursor: wait; }
+
+  .result-title {
+    font-size: 1.3rem;
+    color: var(--deep-teal);
+    border-bottom: 1px solid var(--parchment-dark);
+    padding-bottom: 0.4rem;
+    margin-top: 0;
+  }
+
+  .story-text {
+    white-space: pre-wrap;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+
+  .facts-box {
+    background: var(--parchment);
+    border-left: 4px solid var(--gold);
+    padding: 0.8rem 1rem;
+    font-size: 0.92rem;
+    color: #5a4c3f;
+    margin-top: 1rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .source-tag {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    background: var(--deep-teal);
+    color: #fff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    letter-spacing: 0.03em;
+  }
+
+  .loading {
+    text-align: center;
+    font-style: italic;
+    color: var(--rust);
+    padding: 1rem;
+  }
+
+  footer {
+    text-align: center;
+    color: #8a7a68;
+    font-size: 0.85rem;
+    padding-bottom: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📜 Lore Weaver</h1>
+  <p>Where every story remembers its world</p>
+</header>
+
+<main>
+  <div class="card">
+    <label for="character">Character Name</label>
+    <input type="text" id="character" placeholder="e.g. Aria, Kael, Nyx..." value="Aria">
+
+    <label for="setting">Setting / World</label>
+    <input type="text" id="setting" placeholder="e.g. the Whispering Vale, Ironreach..." value="the Whispering Vale">
+
+    <label for="theme">Theme</label>
+    <select id="theme">
+      <option value="discovery">Discovery</option>
+      <option value="redemption">Redemption</option>
+      <option value="betrayal">Betrayal</option>
+    </select>
+
+    <button id="generateBtn" onclick="generateStory()">Weave the Tale ✨</button>
+  </div>
+
+  <div id="resultCard" class="card" style="display:none;">
+    <h2 class="result-title">Your Story</h2>
+    <div id="story" class="story-text"></div>
+    <div id="facts" class="facts-box"></div>
+    <span id="sourceTag" class="source-tag"></span>
+  </div>
+
+  <div id="loading" class="loading" style="display:none;">The loom is weaving your tale...</div>
+</main>
+
+<footer>
+  Lore Weaver — built with GitHub Copilot &amp; grounded by Microsoft Foundry IQ
+</footer>
+
+<script>
+async function generateStory() {
+  const character = document.getElementById('character').value || 'Aria';
+  const setting = document.getElementById('setting').value || 'the Whispering Vale';
+  const theme = document.getElementById('theme').value;
+
+  const btn = document.getElementById('generateBtn');
+  const loading = document.getElementById('loading');
+  const resultCard = document.getElementById('resultCard');
+
+  btn.disabled = true;
+  loading.style.display = 'block';
+  resultCard.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ character, setting, theme })
+    });
+    const data = await res.json();
+
+    document.getElementById('story').textContent = data.story;
+    document.getElementById('facts').textContent = "Grounded facts used: " + data.grounded_facts;
+    document.getElementById('sourceTag').textContent = "Source: " + data.source;
+    resultCard.style.display = 'block';
+  } catch (err) {
+    document.getElementById('story').textContent = "Something went wrong while weaving your tale. Please try again.";
+    resultCard.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    loading.style.display = 'none';
+  }
+}
+</script>
+
+</body>
+</html>
