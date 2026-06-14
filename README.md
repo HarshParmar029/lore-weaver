@@ -7,21 +7,33 @@ Lore Weaver is an AI-powered creative storytelling app built for the **Agents Le
 ## ✨ What it does
 
 1. You enter a **character name**, **setting**, and **theme**.
-2. The app retrieves relevant lore facts (character backstories, world descriptions, thematic notes) from a knowledge base via **Foundry IQ's agentic retrieval**.
-3. An AI model weaves those grounded facts into an original short story.
-4. The story, the grounded facts used, and the retrieval source are displayed.
+2. The app runs a **multi-step agentic pipeline**:
+   - **Retrieve** — pulls grounded facts about the character, setting, and theme from the knowledge base via **Foundry IQ's agentic retrieval**.
+   - **Cross-reference** — traverses the knowledge graph to find related factions, historical events, and relationships connected to the character/setting.
+   - **Recall** — checks **world memory** (a log of every story ever generated) for past tales connected to this character or setting.
+   - **Synthesize & Generate** — weaves all of this into an original short story, with inline **numbered citations `[1] [2]`** back to the exact facts used.
+3. The story, the full **agent reasoning trace**, the **cited facts**, and any **memory connections** to past tales are all displayed.
+4. The new story is saved into world memory — so the *next* tale can reference it too.
 
-This ensures every generated story feels like part of a coherent, living world — not a generic, disconnected tale.
+This ensures every generated story feels like part of a coherent, living world that **remembers what came before** — not a generic, disconnected tale.
 
 ## 🧠 Microsoft IQ Integration — Foundry IQ
 
 Foundry IQ powers the knowledge retrieval layer of this app:
 
-- A custom **world lore knowledge base** (character backstories, settings, themes) is connected to a Foundry Agent.
-- When a user submits a prompt, the app queries the Foundry Agent for grounded facts relevant to the character/setting/theme.
-- These cited facts are passed into the story-generation prompt, reducing hallucination and keeping the narrative consistent with established lore.
+- A custom **world lore knowledge graph** (characters, settings, themes, factions, historical events, and relationships) is connected to a Foundry Agent.
+- When a user submits a prompt, the app queries the Foundry Agent for grounded, cited facts relevant to the character/setting/theme.
+- These cited facts are passed into the story-generation prompt with numbered citation markers, reducing hallucination and keeping the narrative consistent with established lore.
 
-If Foundry IQ credentials are not configured, the app gracefully falls back to a local JSON lore knowledge base (`lore_docs/world_lore.json`) so the demo always works.
+If Foundry IQ credentials are not configured, the app gracefully falls back to a **local agentic retrieval engine** that traverses the same knowledge graph structure (`lore_docs/world_lore.json`) — including faction lookups, historical event cross-referencing, and relationship discovery — so the demo always works and still demonstrates the full multi-step reasoning flow.
+
+## 🪄 Advanced Features
+
+- **Multi-step reasoning trace** — every generation shows the agent's step-by-step process: lookup character → lookup setting → lookup theme → cross-reference factions → cross-reference events → cross-reference relationships → check world memory → synthesize → generate.
+- **Numbered citations** — the generated story includes `[1]`, `[2]`, etc. markers that map directly to the grounded facts panel, so you can verify exactly which lore informed which sentence.
+- **World memory / continuity** — Lore Weaver remembers every story it has written (`lore_docs/story_log.json`). If you generate a new tale about a character or setting that appeared before, the agent surfaces that connection and the new story can acknowledge it — the world genuinely grows over time.
+- **World Atlas tab** — explore the full interconnected knowledge graph (characters, settings, factions, historical events, relationships) that powers the retrieval.
+- **Story Archive tab** — browse the full history of generated tales and how the world's memory has evolved.
 
 ## 🛠️ Tech Stack
 
@@ -67,18 +79,19 @@ GitHub Copilot Chat was used extensively during development to:
 
 ```
 lore-weaver/
-├── app.py                  # Flask backend + Foundry IQ integration
+├── app.py                  # Flask backend + multi-step agentic pipeline + Foundry IQ integration
 ├── requirements.txt
 ├── lore_docs/
-│   └── world_lore.json     # Local fallback lore knowledge base
+│   ├── world_lore.json     # Knowledge graph: characters, settings, themes, factions, events, relationships
+│   └── story_log.json      # World memory — log of every generated story
 ├── templates/
-│   └── index.html          # Frontend UI
+│   └── index.html          # Frontend UI (Weave a Tale / World Atlas / Story Archive)
 └── README.md
 ```
 
 ## 🎯 Why It's Creative
 
-Lore Weaver turns story generation into **world-building**. Instead of producing isolated, generic stories, it grounds each tale in a shared knowledge base — so characters have consistent histories, settings have consistent rules, and themes connect to deeper lore. The result feels like reading a chapter from a much larger, living world.
+Lore Weaver turns story generation into **world-building backed by a reasoning agent**. Instead of a single prompt-to-story call, it runs a visible multi-step pipeline — retrieve, cross-reference, recall memory, synthesize, generate, cite — so every tale is grounded in a shared, interconnected knowledge graph and in the world's own history of stories. Characters have consistent histories, settings have consistent rules, themes connect to deeper lore, and each new story can reference the ones that came before it. The result feels like reading a new chapter from a much larger, living world — one that remembers what you wrote into it.
 
 ## ⚠️ Disclaimer
 

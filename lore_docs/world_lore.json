@@ -1,35 +1,153 @@
 {
   "characters": {
     "aria": {
-      "backstory": "Aria is a wandering cartographer who can see paths that no longer exist, remnants of roads erased by time."
+      "title": "The Cartographer of Lost Roads",
+      "backstory": "Aria is a wandering cartographer who can see paths that no longer exist, remnants of roads erased by time. She carries a map that redraws itself whenever a forgotten road is rediscovered.",
+      "factions": ["cartographers_guild"],
+      "linked_settings": ["the whispering vale", "the sunken library"]
     },
     "kael": {
-      "backstory": "Kael was once a guardian of the Sunken Library, sworn to protect knowledge that the world tried to forget."
+      "title": "Last Guardian of the Sunken Library",
+      "backstory": "Kael was once a guardian of the Sunken Library, sworn to protect knowledge that the world tried to forget. He has not surfaced in over a decade.",
+      "factions": ["ashen_choir"],
+      "linked_settings": ["the sunken library"]
     },
     "nyx": {
-      "backstory": "Nyx is a shapeshifting messenger spirit who delivers warnings between rival kingdoms, trusted by none but needed by all."
+      "title": "The Unwanted Messenger",
+      "backstory": "Nyx is a shapeshifting messenger spirit who delivers warnings between rival kingdoms, trusted by none but needed by all. Nyx's last delivered warning changed the fate of a queen.",
+      "factions": [],
+      "linked_settings": ["ironreach", "skyhaven docks"]
+    },
+    "thessaly": {
+      "title": "The Exiled Queen of Ironreach",
+      "backstory": "Thessaly once ruled Ironreach from its forge-warmed halls until a warning from Nyx exposed a plot within her own court, forcing her into exile across the Ashfall Steppes.",
+      "factions": ["ironreach_remnant_council"],
+      "linked_settings": ["ironreach", "the ashfall steppes"]
+    },
+    "old marrow": {
+      "title": "The Listening Oracle",
+      "backstory": "Old Marrow is an ancient tree-spirit rooted at the heart of the Whispering Vale. The wind-borne voices that travelers hear are fragments of memory that Old Marrow has been collecting for centuries.",
+      "factions": [],
+      "linked_settings": ["the whispering vale"]
+    },
+    "captain reyes vol": {
+      "title": "Smuggler of Banned Lore",
+      "backstory": "Captain Reyes Vol runs an airship out of Skyhaven Docks, quietly transporting books and relics that the Ashen Choir has marked for destruction.",
+      "factions": ["cartographers_guild"],
+      "linked_settings": ["skyhaven docks", "the sunken library"]
     }
   },
   "settings": {
     "the whispering vale": {
-      "description": "A valley where the wind carries fragments of conversations from the past, audible only to those who listen closely."
+      "title": "Valley of Remembered Voices",
+      "description": "A valley where the wind carries fragments of conversations from the past, audible only to those who listen closely. At its center grows Old Marrow, the source of the whispers.",
+      "linked_events": ["the_sundering"]
     },
     "ironreach": {
-      "description": "A mountain city built into the bones of an ancient, long-dead titan, its halls still warm from forges that never went cold."
+      "title": "The Forge City",
+      "description": "A mountain city built into the bones of an ancient, long-dead titan, its halls still warm from forges that never went cold. Once ruled by Queen Thessaly before her exile.",
+      "linked_events": ["the_sundering", "thessalys_exile"]
     },
     "the sunken library": {
-      "description": "A drowned archive beneath a calm lake, where books are preserved in bubbles of ancient magic and only certain guardians may enter."
+      "title": "The Drowned Archive",
+      "description": "A drowned archive beneath a calm lake, where books are preserved in bubbles of ancient magic and only certain guardians may enter. Kael has not been seen leaving it in ten years.",
+      "linked_events": ["the_librarys_drowning"]
+    },
+    "the ashfall steppes": {
+      "title": "The Grey Wastes",
+      "description": "A vast plain of ash and bone-white stone, formed when the titan beneath Ironreach finally died. Exiles and wanderers cross it seeking the few oases that remain.",
+      "linked_events": ["the_sundering", "thessalys_exile"]
+    },
+    "skyhaven docks": {
+      "title": "The Floating Trade Port",
+      "description": "A sprawling port suspended above the clouds by ancient lifting-stones, where airship captains trade goods, secrets, and forbidden books beyond the reach of any single kingdom's law.",
+      "linked_events": ["nyxs_last_warning"]
     }
   },
   "themes": {
     "discovery": {
-      "notes": "Stories of discovery in this world often involve uncovering truths the world itself tried to bury."
+      "notes": "Stories of discovery in this world often involve uncovering truths the world itself tried to bury — old roads, drowned books, or buried titans."
     },
     "redemption": {
-      "notes": "Redemption arcs frequently tie back to old debts owed to forgotten spirits or broken oaths."
+      "notes": "Redemption arcs frequently tie back to old debts owed to forgotten spirits or broken oaths, often involving the Ashen Choir or the Sunken Library."
     },
     "betrayal": {
-      "notes": "Betrayal in this world often comes from trusted guardians or messengers, reflecting the fragile balance between kingdoms."
+      "notes": "Betrayal in this world often comes from trusted guardians or messengers, reflecting the fragile balance between kingdoms — as seen in Nyx's Last Warning."
+    },
+    "sacrifice": {
+      "notes": "Sacrifice stories often center on the titan whose death formed Ironreach and the Ashfall Steppes, or on guardians like Kael who give up the surface world."
+    },
+    "rebellion": {
+      "notes": "Rebellion stories frequently involve the Cartographers' Guild or exiled nobles like Thessaly working against the Ashen Choir's control of knowledge."
     }
-  }
+  },
+  "factions": {
+    "cartographers_guild": {
+      "name": "The Cartographers' Guild",
+      "description": "A loose network of mapmakers and smugglers dedicated to preserving lost roads, routes, and the knowledge of how to reach forgotten places."
+    },
+    "ashen_choir": {
+      "name": "The Ashen Choir",
+      "description": "A secretive order that believes some knowledge is too dangerous to exist, and works to seal or destroy it — often putting them at odds with the Cartographers' Guild."
+    },
+    "ironreach_remnant_council": {
+      "name": "Ironreach Remnant Council",
+      "description": "What remains of Ironreach's nobility after Thessaly's exile, now divided between those loyal to her and those who orchestrated her fall."
+    }
+  },
+  "events": [
+    {
+      "id": "the_sundering",
+      "name": "The Sundering",
+      "summary": "The ancient titan beneath Ironreach died, its collapse forming both Ironreach's mountain halls and the ash-choked Steppes beyond.",
+      "linked_settings": ["ironreach", "the ashfall steppes", "the whispering vale"]
+    },
+    {
+      "id": "the_librarys_drowning",
+      "name": "The Library's Drowning",
+      "summary": "To protect it from the Ashen Choir, the Library was deliberately sunk beneath a lake, sealed behind wards only its guardians can pass.",
+      "linked_settings": ["the sunken library"],
+      "linked_characters": ["kael"]
+    },
+    {
+      "id": "nyxs_last_warning",
+      "name": "Nyx's Last Warning",
+      "summary": "Nyx delivered a warning to Queen Thessaly of Ironreach about a plot within her own court — the warning was true, but acting on it cost Thessaly her throne.",
+      "linked_settings": ["ironreach", "skyhaven docks"],
+      "linked_characters": ["nyx", "thessaly"]
+    },
+    {
+      "id": "thessalys_exile",
+      "name": "Thessaly's Exile",
+      "summary": "Following the fallout of Nyx's warning, Queen Thessaly was exiled from Ironreach and now wanders the Ashfall Steppes, seeking allies to reclaim her throne.",
+      "linked_settings": ["ironreach", "the ashfall steppes"],
+      "linked_characters": ["thessaly", "nyx"]
+    }
+  ],
+  "relationships": [
+    {
+      "a": "aria",
+      "b": "kael",
+      "type": "ally",
+      "description": "Aria once mapped a hidden path into the Sunken Library — a path only Kael knows still exists."
+    },
+    {
+      "a": "nyx",
+      "b": "thessaly",
+      "type": "consequence",
+      "description": "Nyx's warning to Thessaly was true, but believing it cost Thessaly her crown — Thessaly has never decided whether to thank Nyx or curse her."
+    },
+    {
+      "a": "captain reyes vol",
+      "b": "kael",
+      "type": "rumor",
+      "description": "Captain Reyes Vol claims to be the only living person who has spoken with Kael since the Library's Drowning."
+    },
+    {
+      "a": "old marrow",
+      "b": "aria",
+      "type": "mentor",
+      "description": "Old Marrow's whispered fragments often guide Aria toward roads she has not yet discovered."
+    }
+  ]
 }

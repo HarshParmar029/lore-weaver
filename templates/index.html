@@ -48,11 +48,40 @@
     font-size: 1.05rem;
   }
 
+  nav.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  nav.tabs button {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--deep-teal);
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  nav.tabs button.active {
+    background: var(--deep-teal);
+    color: #fffdf7;
+    border-color: var(--deep-teal);
+  }
+
   main {
-    max-width: 760px;
+    max-width: 800px;
     margin: 2rem auto;
     padding: 0 1.5rem 4rem;
   }
+
+  .view { display: none; }
+  .view.active { display: block; }
 
   .card {
     background: #fffdf7;
@@ -82,7 +111,7 @@
     color: var(--ink);
   }
 
-  button {
+  button.primary {
     background: var(--rust);
     color: #fffdf7;
     border: none;
@@ -96,8 +125,8 @@
     width: 100%;
   }
 
-  button:hover { background: #8a3f22; }
-  button:disabled { background: #c9a98f; cursor: wait; }
+  button.primary:hover { background: #8a3f22; }
+  button.primary:disabled { background: #c9a98f; cursor: wait; }
 
   .result-title {
     font-size: 1.3rem;
@@ -113,19 +142,67 @@
     font-size: 1.05rem;
   }
 
-  .facts-box {
+  .story-text .cite {
+    color: #fff;
+    background: var(--gold);
+    border-radius: 4px;
+    padding: 0 0.35em;
+    font-size: 0.75em;
+    font-weight: bold;
+    vertical-align: super;
+    cursor: help;
+  }
+
+  .facts-list {
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 0;
+  }
+
+  .facts-list li {
     background: var(--parchment);
     border-left: 4px solid var(--gold);
-    padding: 0.8rem 1rem;
+    padding: 0.6rem 0.9rem;
     font-size: 0.92rem;
     color: #5a4c3f;
-    margin-top: 1rem;
+    margin-bottom: 0.5rem;
     border-radius: 0 4px 4px 0;
   }
 
+  .facts-list .fid {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 0.4em;
+    font-weight: bold;
+    font-size: 0.8em;
+    margin-right: 0.4em;
+  }
+
+  .facts-list .cat {
+    display: inline-block;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--deep-teal);
+    font-weight: bold;
+    margin-left: 0.5em;
+  }
+
+  .reasoning-list {
+    margin: 0.6rem 0 0;
+    padding-left: 1.2rem;
+    font-size: 0.92rem;
+    color: #5a4c3f;
+    line-height: 1.6;
+  }
+
+  .reasoning-list li { margin-bottom: 0.35rem; }
+
   .source-tag {
     display: inline-block;
-    margin-top: 0.6rem;
+    margin-top: 0.8rem;
     font-size: 0.8rem;
     background: var(--deep-teal);
     color: #fff;
@@ -138,6 +215,82 @@
     text-align: center;
     font-style: italic;
     color: var(--rust);
+    padding: 1rem;
+  }
+
+  details summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--deep-teal);
+    margin-bottom: 0.4rem;
+  }
+
+  /* World Atlas */
+  .atlas-section h3 {
+    color: var(--deep-teal);
+    border-bottom: 1px solid var(--parchment-dark);
+    padding-bottom: 0.3rem;
+  }
+
+  .atlas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .atlas-card {
+    background: var(--parchment);
+    border: 1px solid var(--parchment-dark);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+  }
+
+  .atlas-card h4 {
+    margin: 0 0 0.3rem;
+    color: var(--rust);
+    font-size: 1rem;
+  }
+
+  .atlas-card p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .atlas-card .sub {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--deep-teal);
+    margin-bottom: 0.3rem;
+  }
+
+  /* Story Archive */
+  .archive-entry {
+    background: var(--parchment);
+    border-left: 4px solid var(--deep-teal);
+    border-radius: 0 4px 4px 0;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.92rem;
+  }
+
+  .archive-entry .meta {
+    font-weight: bold;
+    color: var(--deep-teal);
+    margin-bottom: 0.2rem;
+  }
+
+  .archive-entry .ts {
+    font-size: 0.75rem;
+    color: var(--rust);
+    font-style: italic;
+  }
+
+  .empty-note {
+    text-align: center;
+    color: #8a7a68;
+    font-style: italic;
     padding: 1rem;
   }
 
@@ -154,34 +307,84 @@
 <header>
   <h1>📜 Lore Weaver</h1>
   <p>Where every story remembers its world</p>
+  <nav class="tabs">
+    <button class="tab-btn active" data-view="weave">✨ Weave a Tale</button>
+    <button class="tab-btn" data-view="atlas">🗺️ World Atlas</button>
+    <button class="tab-btn" data-view="archive">📚 Story Archive</button>
+  </nav>
 </header>
 
 <main>
-  <div class="card">
-    <label for="character">Character Name</label>
-    <input type="text" id="character" placeholder="e.g. Aria, Kael, Nyx..." value="Aria">
 
-    <label for="setting">Setting / World</label>
-    <input type="text" id="setting" placeholder="e.g. the Whispering Vale, Ironreach..." value="the Whispering Vale">
+  <!-- WEAVE VIEW -->
+  <section id="view-weave" class="view active">
+    <div class="card">
+      <label for="character">Character Name</label>
+      <input type="text" id="character" placeholder="e.g. Aria, Kael, Nyx, Thessaly..." value="Aria">
 
-    <label for="theme">Theme</label>
-    <select id="theme">
-      <option value="discovery">Discovery</option>
-      <option value="redemption">Redemption</option>
-      <option value="betrayal">Betrayal</option>
-    </select>
+      <label for="setting">Setting / World</label>
+      <input type="text" id="setting" placeholder="e.g. the Whispering Vale, Ironreach..." value="the Whispering Vale">
 
-    <button id="generateBtn" onclick="generateStory()">Weave the Tale ✨</button>
-  </div>
+      <label for="theme">Theme</label>
+      <select id="theme">
+        <option value="discovery">Discovery</option>
+        <option value="redemption">Redemption</option>
+        <option value="betrayal">Betrayal</option>
+        <option value="sacrifice">Sacrifice</option>
+        <option value="rebellion">Rebellion</option>
+      </select>
 
-  <div id="resultCard" class="card" style="display:none;">
-    <h2 class="result-title">Your Story</h2>
-    <div id="story" class="story-text"></div>
-    <div id="facts" class="facts-box"></div>
-    <span id="sourceTag" class="source-tag"></span>
-  </div>
+      <button id="generateBtn" class="primary" onclick="generateStory()">Weave the Tale ✨</button>
+    </div>
 
-  <div id="loading" class="loading" style="display:none;">The loom is weaving your tale...</div>
+    <div id="loading" class="loading" style="display:none;">The loom is weaving your tale... retrieving lore, cross-referencing the world, consulting memory...</div>
+
+    <div id="resultCard" class="card" style="display:none;">
+      <h2 class="result-title">Your Story</h2>
+      <div id="story" class="story-text"></div>
+      <span id="sourceTag" class="source-tag"></span>
+
+      <details style="margin-top: 1.2rem;">
+        <summary>🧠 Agent Reasoning Trace</summary>
+        <ol id="reasoningList" class="reasoning-list"></ol>
+      </details>
+
+      <details style="margin-top: 0.8rem;" open>
+        <summary>📖 Grounded Facts &amp; Citations</summary>
+        <ul id="factsList" class="facts-list"></ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- WORLD ATLAS VIEW -->
+  <section id="view-atlas" class="view">
+    <div class="card">
+      <h2 class="result-title">World Atlas</h2>
+      <p style="font-size:0.9rem; color:#5a4c3f;">
+        This is the knowledge graph Lore Weaver draws from — characters, settings, factions,
+        historical events, and the relationships between them. Foundry IQ (or the local agentic
+        retrieval fallback) traverses this graph to ground every story.
+      </p>
+      <div id="atlasContent">
+        <p class="empty-note">Loading world atlas...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY ARCHIVE VIEW -->
+  <section id="view-archive" class="view">
+    <div class="card">
+      <h2 class="result-title">Story Archive — World Memory</h2>
+      <p style="font-size:0.9rem; color:#5a4c3f;">
+        Every tale Lore Weaver generates is remembered. Future stories check this archive
+        for connections to past characters, settings, and themes — so the world keeps growing.
+      </p>
+      <div id="archiveContent">
+        <p class="empty-note">Loading story archive...</p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -189,6 +392,20 @@
 </footer>
 
 <script>
+// --- Tab navigation ---
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('view-' + btn.dataset.view).classList.add('active');
+
+    if (btn.dataset.view === 'atlas') loadAtlas();
+    if (btn.dataset.view === 'archive') loadArchive();
+  });
+});
+
+// --- Weave a tale ---
 async function generateStory() {
   const character = document.getElementById('character').value || 'Aria';
   const setting = document.getElementById('setting').value || 'the Whispering Vale';
@@ -210,17 +427,117 @@ async function generateStory() {
     });
     const data = await res.json();
 
-    document.getElementById('story').textContent = data.story;
-    document.getElementById('facts').textContent = "Grounded facts used: " + data.grounded_facts;
+    // Render story with highlighted [n] citations
+    const storyHtml = (data.story || '').replace(/\[(\d+)\]/g, '<span class="cite">$1</span>');
+    document.getElementById('story').innerHTML = storyHtml;
+
     document.getElementById('sourceTag').textContent = "Source: " + data.source;
+
+    // Reasoning trace
+    const reasoningList = document.getElementById('reasoningList');
+    reasoningList.innerHTML = '';
+    (data.reasoning_trace || []).forEach(step => {
+      const li = document.createElement('li');
+      li.textContent = step;
+      reasoningList.appendChild(li);
+    });
+
+    // Facts / citations
+    const factsList = document.getElementById('factsList');
+    factsList.innerHTML = '';
+    (data.facts || []).forEach(fact => {
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="fid">${fact.id}</span>${fact.text}<span class="cat">${fact.category}</span>`;
+      factsList.appendChild(li);
+    });
+
     resultCard.style.display = 'block';
   } catch (err) {
     document.getElementById('story').textContent = "Something went wrong while weaving your tale. Please try again.";
+    document.getElementById('reasoningList').innerHTML = '';
+    document.getElementById('factsList').innerHTML = '';
     resultCard.style.display = 'block';
   } finally {
     btn.disabled = false;
     loading.style.display = 'none';
   }
+}
+
+// --- World Atlas ---
+let atlasLoaded = false;
+async function loadAtlas() {
+  if (atlasLoaded) return;
+  const container = document.getElementById('atlasContent');
+  try {
+    const res = await fetch('/api/lore');
+    const lore = await res.json();
+    let html = '';
+
+    html += '<div class="atlas-section"><h3>Characters</h3><div class="atlas-grid">';
+    for (const [key, c] of Object.entries(lore.characters || {})) {
+      html += `<div class="atlas-card"><div class="sub">${c.title || ''}</div><h4>${capitalize(key)}</h4><p>${c.backstory}</p></div>`;
+    }
+    html += '</div></div>';
+
+    html += '<div class="atlas-section"><h3>Settings</h3><div class="atlas-grid">';
+    for (const [key, s] of Object.entries(lore.settings || {})) {
+      html += `<div class="atlas-card"><div class="sub">${s.title || ''}</div><h4>${capitalize(key)}</h4><p>${s.description}</p></div>`;
+    }
+    html += '</div></div>';
+
+    html += '<div class="atlas-section"><h3>Factions</h3><div class="atlas-grid">';
+    for (const [key, f] of Object.entries(lore.factions || {})) {
+      html += `<div class="atlas-card"><h4>${f.name}</h4><p>${f.description}</p></div>`;
+    }
+    html += '</div></div>';
+
+    html += '<div class="atlas-section"><h3>Historical Events</h3><div class="atlas-grid">';
+    for (const e of (lore.events || [])) {
+      html += `<div class="atlas-card"><h4>${e.name}</h4><p>${e.summary}</p></div>`;
+    }
+    html += '</div></div>';
+
+    html += '<div class="atlas-section"><h3>Relationships</h3><div class="atlas-grid">';
+    for (const r of (lore.relationships || [])) {
+      html += `<div class="atlas-card"><div class="sub">${capitalize(r.a)} &amp; ${capitalize(r.b)} (${r.type})</div><p>${r.description}</p></div>`;
+    }
+    html += '</div></div>';
+
+    container.innerHTML = html;
+    atlasLoaded = true;
+  } catch (err) {
+    container.innerHTML = '<p class="empty-note">Could not load world atlas.</p>';
+  }
+}
+
+// --- Story Archive ---
+async function loadArchive() {
+  const container = document.getElementById('archiveContent');
+  try {
+    const res = await fetch('/api/history');
+    const history = await res.json();
+
+    if (!history.length) {
+      container.innerHTML = '<p class="empty-note">No tales have been woven yet. Generate one to begin the world\\'s memory!</p>';
+      return;
+    }
+
+    let html = '';
+    history.forEach(entry => {
+      html += `<div class="archive-entry">
+        <div class="meta">${entry.character} — ${entry.setting} (${entry.theme})</div>
+        <div>${entry.summary}</div>
+        <div class="ts">${entry.timestamp}</div>
+      </div>`;
+    });
+    container.innerHTML = html;
+  } catch (err) {
+    container.innerHTML = '<p class="empty-note">Could not load story archive.</p>';
+  }
+}
+
+function capitalize(s) {
+  return s.replace(/\b\w/g, c => c.toUpperCase());
 }
 </script>
 
