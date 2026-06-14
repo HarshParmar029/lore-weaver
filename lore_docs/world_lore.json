@@ -1,0 +1,35 @@
+{
+  "characters": {
+    "aria": {
+      "backstory": "Aria is a wandering cartographer who can see paths that no longer exist, remnants of roads erased by time."
+    },
+    "kael": {
+      "backstory": "Kael was once a guardian of the Sunken Library, sworn to protect knowledge that the world tried to forget."
+    },
+    "nyx": {
+      "backstory": "Nyx is a shapeshifting messenger spirit who delivers warnings between rival kingdoms, trusted by none but needed by all."
+    }
+  },
+  "settings": {
+    "the whispering vale": {
+      "description": "A valley where the wind carries fragments of conversations from the past, audible only to those who listen closely."
+    },
+    "ironreach": {
+      "description": "A mountain city built into the bones of an ancient, long-dead titan, its halls still warm from forges that never went cold."
+    },
+    "the sunken library": {
+      "description": "A drowned archive beneath a calm lake, where books are preserved in bubbles of ancient magic and only certain guardians may enter."
+    }
+  },
+  "themes": {
+    "discovery": {
+      "notes": "Stories of discovery in this world often involve uncovering truths the world itself tried to bury."
+    },
+    "redemption": {
+      "notes": "Redemption arcs frequently tie back to old debts owed to forgotten spirits or broken oaths."
+    },
+    "betrayal": {
+      "notes": "Betrayal in this world often comes from trusted guardians or messengers, reflecting the fragile balance between kingdoms."
+    }
+  }
+}
